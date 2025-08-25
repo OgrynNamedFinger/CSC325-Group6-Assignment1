@@ -1,80 +1,90 @@
+package WesLee_Williams_Hello;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 /**
- * AppLauncher is the entry point for the HelloWorld demonstration.
- * It displays a splash screen, collects user input, and demonstrates
- * the features of the HelloWorld class.
+ * AppLauncher serves as the entry point of the application.
+ * It collects user input, handles errors, and demonstrates the usage of HelloWorld class.
  */
 public class AppLauncher {
 
+
     /**
-     * Main method to launch the application.
+     * Displays a simple ASCII splash screen.
+     */
+    public static void displaySplashScreen() {
+        System.out.println("*************************************");
+        System.out.println("*                                   *");
+        System.out.println("*        WELCOME TO JAVA APP        *");
+        System.out.println("*             HelloWorld            *");
+        System.out.println("*                                   *");
+        System.out.println("*************************************\n");
+    }
+
+
+    /**Main method to run the application.
+     *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
-        printSplashScreen();
+        displaySplashScreen();
+
 
         Scanner scanner = new Scanner(System.in);
-        String userName = "";
-        int userAge = 0;
+        String name = "";
+        int age = -1;
 
-        // Gather user name with validation
-        while (true) {
-            System.out.print("Enter your name: ");
-            userName = scanner.nextLine().trim();
-            if (userName.isEmpty()) {
-                System.out.println("Error: Name cannot be empty. Please try again.");
-            } else {
-                break;
-            }
-        }
 
-        // Gather user age with validation
+        // Get valid name input
         while (true) {
-            System.out.print("Enter your age: ");
-            String ageInput = scanner.nextLine().trim();
             try {
-                userAge = Integer.parseInt(ageInput);
-                if (userAge < 0) {
-                    System.out.println("Error: Age cannot be negative. Please try again.");
-                } else {
-                    break;
+                System.out.print("Enter your name: ");
+                name = scanner.nextLine().trim();
+                if (name.isEmpty()) {
+                    throw new IllegalArgumentException("Name cannot be empty.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Please enter a valid integer for age.");
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
 
-        HelloWorld user = new HelloWorld(userName, userAge);
-        user.greet();
-        user.greet("Welcome");
-        user.introduce();
 
-        HelloWorld student1 = new HelloWorld("Connor", 19);
-        HelloWorld student2 = new HelloWorld("Alex", 25);
+        // Get valid age input
+        while (true) {
+            try {
+                System.out.print("Enter your age: ");
+                age = scanner.nextInt();
+                if (age < 0) {
+                    throw new IllegalArgumentException("Age cannot be negative.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid integer for age.");
+                scanner.next(); // Clear invalid input
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
 
-        student1.greet();
-        student1.greet("Hello there");
-        student1.introduce();
 
-        student2.greet();
-        student2.greet("Hi");
-        student2.introduce();
+        // Create HelloWorld objects
+        HelloWorld user = new HelloWorld(name, age);
+        //HelloWorld guest = new HelloWorld("Guest");
+
+
+        // Call methods
+        user.greet();                         // greet() without message
+        user.greet("Good morning");           // greet() with message
+        user.introduce();                     // introduce()
+
+
+        //guest.greet();                        // greet() for guest
+       // guest.greet("Welcome");               // greet() with message
+        // Not calling guest.introduce() because age is not initialized
+
 
         scanner.close();
-    }
-
-    /**
-     * Prints an ASCII art splash screen.
-     */
-    public static void printSplashScreen() {
-        System.out.println("**********************************");
-        System.out.println("*    Welcome to HelloWorld App   *");
-        System.out.println("*        __    __   ___          *");
-        System.out.println("*       / /   / /  / _ \\         *");
-        System.out.println("*      / /   / /  | | | |        *");
-        System.out.println("*     / /___/ /   | |_| |        *");
-        System.out.println("*    /_______/    \\____/          *");
-        System.out.println("**********************************\n");
     }
 }
