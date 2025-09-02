@@ -1,0 +1,27 @@
+I used ChatGPT exclusively for this assignment. 
+I used it to create virtually all methods and classes.
+I found it to be very helpful for the majority of code, but chatGPT started
+to have issues when it came to moving all of the files into packages. 
+I had to import each of the packages, add ZooManager.java to the Main.java,
+and make some slight tweaks to the layout of the program. 
+Although Ive since redid the orientation, chatGPT also 
+created animals and assigned them things that the animal would do, like parrots flying
+or mammals walking. 
+I gave chatGPT the step instructions, minus the AI reflection, submission,
+step number, point amounts, criteria rubric, or checklist. 
+
+I would likely use code similar to this in a real world app, though I 
+recognize that pretty much any real world app would be far more in depth than this. 
+I believe that the zoo code from chatGPT is a good start to a working menu that
+showcases interfaces and abstract classes. The UI, albeit terminal, is also relatively 
+clean and user friendly, something that chatGPT struggled with in the past.
+
+An example of prompt to response is: 
+
+prompt: what do the animals need @override?
+Response: In Java, you use @Override whenever a subclass provides
+its own implementation of a method that is declared in a superclass
+(abstract or concrete) or comes from an interface.
+
+ChatGPTs reponse was helpful in explaining exactly why @Override was used
+and why it was only used sometimes. 
