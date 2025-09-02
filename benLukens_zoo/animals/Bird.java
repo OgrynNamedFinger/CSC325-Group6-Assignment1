@@ -3,11 +3,12 @@ package animals;
 import interfaces.Flyable;
 import interfaces.Walkable;
 
-public class Bird extends Animal implements Flyable, Walkable {
+public class Bird extends Animal implements Flyable, Walkable { // because most birds do both
     public Bird(String name) {
         super(name);
     }
 
+    // uses @Override because Animal.java also creates these public methods
     @Override
     public void makeSound() {
         System.out.println(getName() + " chirps: Tweet tweet!");
